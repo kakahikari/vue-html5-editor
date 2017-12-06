@@ -1,7 +1,7 @@
 /**
- * Vue-html5-editor 1.1.1
+ * Vue-html5-editor 1.2.0
  * https://github.com/PeakTai/vue-html5-editor
- * build at Wed Dec 06 2017 14:41:14 GMT+0800 (CST)
+ * build at Wed Dec 06 2017 14:42:50 GMT+0800 (CST)
  */
 
 (function (global, factory) {
@@ -19,7 +19,7 @@ function __$styleInject(css, returnValue) {
   var style = document.createElement('style');
   style.type = 'text/css';
   head.appendChild(style);
-
+  
   if (style.styleSheet){
     style.styleSheet.cssText = css;
   } else {
@@ -768,7 +768,7 @@ var dashboard$5 = {
     template: template$5,
     data: function data(){
         return {
-            version: "1.1.1"
+            version: "1.2.0"
         }
     }
 };
