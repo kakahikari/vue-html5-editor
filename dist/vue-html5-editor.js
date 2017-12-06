@@ -1,7 +1,7 @@
 /**
- * Vue-html5-editor 1.1.0
+ * Vue-html5-editor 1.1.1
  * https://github.com/PeakTai/vue-html5-editor
- * build at Fri Nov 10 2017 18:50:18 GMT+0800 (CST)
+ * build at Wed Dec 06 2017 14:41:14 GMT+0800 (CST)
  */
 
 (function (global, factory) {
@@ -19,7 +19,7 @@ function __$styleInject(css, returnValue) {
   var style = document.createElement('style');
   style.type = 'text/css';
   head.appendChild(style);
-  
+
   if (style.styleSheet){
     style.styleSheet.cssText = css;
   } else {
@@ -768,7 +768,7 @@ var dashboard$5 = {
     template: template$5,
     data: function data(){
         return {
-            version: "1.1.0"
+            version: "1.1.1"
         }
     }
 };
@@ -1187,37 +1187,6 @@ RangeHandler.prototype.execCommand = function execCommand (command, arg) {
 
     switch (command) {
 
-        case Command.JUSTIFY_LEFT: {
-            document.execCommand(Command.JUSTIFY_LEFT, false, arg);
-            break
-        }
-
-        case Command.JUSTIFY_RIGHT: {
-            document.execCommand(Command.JUSTIFY_RIGHT, false, arg);
-            break
-        }
-
-        case Command.JUSTIFY_CENTER: {
-            document.execCommand(Command.JUSTIFY_CENTER, false, arg);
-            break
-        }
-
-        case Command.FORE_COLOR: {
-            document.execCommand(Command.FORE_COLOR, false, arg);
-            break
-        }
-        case Command.BACK_COLOR: {
-            document.execCommand(Command.BACK_COLOR, false, arg);
-            break
-        }
-        case Command.REMOVE_FORMAT: {
-            document.execCommand(Command.REMOVE_FORMAT, false, arg);
-            break
-        }
-        case Command.FONT_NAME: {
-            document.execCommand(Command.FONT_NAME, false, arg);
-            break
-        }
         case Command.FONT_SIZE: {
             // 重新实现，改为直接修改样式
             var textNodes = this.getAllTextNodesInRange();
@@ -1329,31 +1298,6 @@ RangeHandler.prototype.execCommand = function execCommand (command, arg) {
             });
             break
         }
-        case Command.INSERT_HORIZONTAL_RULE: {
-            document.execCommand(Command.INSERT_HORIZONTAL_RULE, false);
-            break
-        }
-        case Command.INSERT_IMAGE: {
-            document.execCommand(Command.INSERT_IMAGE, false, arg);
-            break
-        }
-        case Command.INSERT_VIDEO: {
-            var videoEl = this.getVidelElement(arg);
-            this.range.insertNode(videoEl);
-            break
-        }
-        case Command.CREATE_LINK: {
-            document.execCommand(Command.CREATE_LINK, false, arg);
-            break
-        }
-        case Command.INSERT_ORDERED_LIST: {
-            document.execCommand(Command.INSERT_ORDERED_LIST, false, arg);
-            break
-        }
-        case Command.INSERT_UNORDERED_LIST: {
-            document.execCommand(Command.INSERT_UNORDERED_LIST, false, arg);
-            break
-        }
         case Command.INSERT_HTML: {
             if (document.execCommand(Command.INSERT_HTML, false, arg)) {
                 break
@@ -1369,38 +1313,6 @@ RangeHandler.prototype.execCommand = function execCommand (command, arg) {
             }
             this.range.deleteContents();
             this.range.insertNode(fragment);
-            break
-        }
-        case Command.BOLD: {
-            document.execCommand(Command.BOLD, false, arg);
-            break
-        }
-        case Command.ITALIC: {
-            document.execCommand(Command.ITALIC, false);
-            break
-        }
-        case Command.UNDERLINE: {
-            document.execCommand(Command.UNDERLINE, false);
-            break
-        }
-        case Command.STRIKE_THROUGH: {
-            document.execCommand(Command.STRIKE_THROUGH, false);
-            break
-        }
-        case Command.SUBSCRIPT: {
-            document.execCommand(Command.SUBSCRIPT, false);
-            break
-        }
-        case Command.SUPERSCRIPT: {
-            document.execCommand(Command.SUPERSCRIPT, false);
-            break
-        }
-        case Command.UNDO: {
-            document.execCommand(Command.UNDO, false);
-            break
-        }
-        case Command.UNLINK: {
-            document.execCommand(Command.UNLINK, false);
             break
         }
         default: {
@@ -1779,10 +1691,12 @@ var VueHtml5Editor = function VueHtml5Editor(options) {
     if (Array.isArray(options.visibleModules)) {
         modules = (function () {
             var arr = [];
-            modules.forEach(function (module) {
-                if (options.visibleModules.includes(module.name)) {
-                    arr.push(module);
-                }
+            options.visibleModules.forEach(function (name) {
+                modules.forEach(function (module) {
+                    if (module.name === name) {
+                        arr.push(module);
+                    }
+                });
             });
             return arr
         })();
